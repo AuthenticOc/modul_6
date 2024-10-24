@@ -1,5 +1,6 @@
 # Local .terraform directories
 **/.terraform/*
+.terraform.lock.hcl
 
 # .tfstate files
 *.tfstate
@@ -30,3 +31,12 @@ override.tf.json
 .terraformrc
 terraform.rc
 course materials/module01/secret.txt
+
+# Ignore CLI configuration files
+.terraformrc
+terraform.rc
+course materials/module01/secret.txt    
+
+tfplan
+
+!example_override.tf

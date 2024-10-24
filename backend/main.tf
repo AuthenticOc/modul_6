@@ -7,7 +7,7 @@ terraform {
     }
 
     backend "azurerm" {
-    resource_group_name   = "rg-demo-backend-oc"
+   resource_group_name   = "rg-demo-backend-oc"
     storage_account_name  = "sademobackendoc"
     container_name        = "sc-backend-oc"
     key                   = "backend.terraform.tfstate"
@@ -68,7 +68,7 @@ resource "azurerm_key_vault" "kv_backend" {
     ]
 
     storage_permissions = [
-      "Get", "set", "list",
+      "Get", "Set", "List",
     ]
   }
 }
