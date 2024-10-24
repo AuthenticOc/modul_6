@@ -4,7 +4,14 @@ terraform {
         source  = "hashicorp/azurerm"
         version = "4.0.1"
         }
-    } 
+    }
+
+    backend "azurerm" {
+    resource_group_name   = "rg-demo-backend-oc"
+    storage_account_name  = "sademobackendoc"
+    container_name        = "sc-backend-oc"
+    key                   = "backend.terraform.tfstate"
+  } 
 }
 
 provider "azurerm" {
@@ -72,4 +79,3 @@ resource "azurerm_key_vault_secret" "sa_backend_access_key" {
   key_vault_id = azurerm_key_vault.kv_backend.id
 }
 
- 
