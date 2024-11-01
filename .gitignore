@@ -40,3 +40,5 @@ course materials/module01/secret.txt
 tfplan
 
 !example_override.tf
+
+test/ 
