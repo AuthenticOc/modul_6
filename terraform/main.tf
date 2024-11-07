@@ -4,7 +4,7 @@ locals {
     rg_name = "${var.rg_name}-${local.workspaces_suffix}"
     sa_name = "${var.sa_name}${local.workspaces_suffix}"
 
-    dynamic_content = "Web page created with Terraform, from workspace - ${terraform.workspace}"
+    dynamic_content = "Web page created with Terraform(github action), from workspace - ${terraform.workspace}"
 }
 
 resource "random_string" "random_string" {
