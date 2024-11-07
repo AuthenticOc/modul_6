@@ -1,0 +1,57 @@
+name: Terraform Destroy
+
+on:
+  workflow_dispatch:
+
+env:
+  ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+  ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+  ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+  ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+  WORKING_DIR: ./actionstest
+
+jobs:
+  destroy_dev_stage:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+
+      - name: Terraform init
+        run: terraform init
+        working-directory: ${{ env.WORKING_DIR }}
+
+      - name: Terraform workspace select dev
+        run: terraform workspace select dev || exit 0
+        working-directory: ${{ env.WORKING_DIR }}
+      
+      - name: Terraform destroy dev
+        run: terraform destroy -auto-approve
+        working-directory: ${{ env.WORKING_DIR }}
+
+      - name: Terraform workspace select stage
+        run: terraform workspace select stage || exit 0
+        working-directory: ${{ env.WORKING_DIR }}
+      
+      - name: Terraform destroy stage
+        run: terraform destroy -auto-approve
+        working-directory: ${{ env.WORKING_DIR }}
+
+  destroy_prod:
+    needs: destroy_dev_stage
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+
+      - name: Terraform init
+        run: terraform init
+        working-directory: ${{ env.WORKING_DIR }}
+
+      - name: Terraform workspace select prod
+        run: terraform workspace select prod || exit 0
+        working-directory: ${{ env.WORKING_DIR }}
+      
+      - name: Terraform destroy prod
+        run: terraform destroy -auto-approve
+        working-directory: ${{ env.WORKING_DIR }}
