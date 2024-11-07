@@ -6,18 +6,21 @@ variable "subscription_id" {
 variable "rg_name" {
   description = "Resource Group Name"
   type        = string
+  default = "rg-demo-oc"
   
 }
 
 variable "rg_location" {
   description = "Resource Group Location"
   type        = string
+  default     = "westeurope"
   
 }
 
 variable "sa_name" {
   description = "Storage Account Name"
   type        = string
+  default     = "sademoweboc"
   
 }
 
